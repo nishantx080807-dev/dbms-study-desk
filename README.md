@@ -2,6 +2,10 @@
 
 A standalone, offline-friendly interactive DBMS mastery handbook and progress checklist created by Nishant.
 
+## Live site
+
+**[Open DBMS Study Desk](https://dbms-study-desk.vercel.app/)**
+
 ## Features
 
 - 13 handbook chapters and 254 checklist actions
@@ -10,6 +14,6 @@ A standalone, offline-friendly interactive DBMS mastery handbook and progress ch
 - JSON backup and restore
 - Responsive, keyboard-accessible interface
 
-Open `index.html` locally or visit the Vercel deployment.
+Open `index.html` locally or use the live Vercel deployment above.
 
 Created by [Nishant](https://github.com/nishantx080807-dev).
