@@ -1,2 +1,34 @@
-import {useEffect,useState} from 'react';
-export function useTheme(){const [theme,setTheme]=useState(()=>document.documentElement.dataset.theme==='light'?'light':'dark');useEffect(()=>{document.documentElement.dataset.theme=theme;document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#0a0d14':'#faf8f4');},[theme]);useEffect(()=>{const query=matchMedia('(prefers-color-scheme: light)');const handler=()=>{try{if(!localStorage.getItem('dbms-theme'))setTheme(query.matches?'light':'dark');}catch{}};query.addEventListener('change',handler);return()=>query.removeEventListener('change',handler);},[]);return {theme,toggle:()=>setTheme(t=>{const next=t==='dark'?'light':'dark';try{localStorage.setItem('dbms-theme',next);}catch{}return next;})};}
+import { useEffect, useState } from "react";
+export function useTheme() {
+  const [theme, setTheme] = useState(() =>
+    document.documentElement.dataset.theme === "light" ? "light" : "dark",
+  );
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#0a0d14" : "#faf8f4");
+  }, [theme]);
+  useEffect(() => {
+    const query = matchMedia("(prefers-color-scheme: light)");
+    const handler = () => {
+      try {
+        if (!localStorage.getItem("dbms-theme"))
+          setTheme(query.matches ? "light" : "dark");
+      } catch {}
+    };
+    query.addEventListener("change", handler);
+    return () => query.removeEventListener("change", handler);
+  }, []);
+  return {
+    theme,
+    toggle: () =>
+      setTheme((t) => {
+        const next = t === "dark" ? "light" : "dark";
+        try {
+          localStorage.setItem("dbms-theme", next);
+        } catch {}
+        return next;
+      }),
+  };
+}

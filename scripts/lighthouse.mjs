@@ -1,0 +1,6 @@
+import lighthouse from 'lighthouse';
+import {launch} from 'chrome-launcher';
+import fs from 'node:fs';
+import runtime from './browser-runtime.cjs';
+const chrome=await launch({chromePath:runtime.chromePath,chromeFlags:['--headless','--no-sandbox','--disable-dev-shm-usage']});
+try{const result=await lighthouse(process.env.STUDY_URL||'http://127.0.0.1:4173/',{port:chrome.port,output:'html',onlyCategories:['performance','accessibility','best-practices','seo'],formFactor:'mobile',screenEmulation:{mobile:true,width:375,height:812,deviceScaleFactor:1,disabled:false}});fs.mkdirSync('output/lighthouse',{recursive:true});fs.writeFileSync('output/lighthouse/report.html',result.report);fs.writeFileSync('output/lighthouse/result.json',JSON.stringify(result.lhr,null,2));console.log(JSON.stringify({scores:Object.fromEntries(Object.entries(result.lhr.categories).map(([k,v])=>[k,Math.round(v.score*100)])),metrics:Object.fromEntries(['first-contentful-paint','largest-contentful-paint','total-blocking-time','cumulative-layout-shift','speed-index'].map(id=>[id,result.lhr.audits[id].displayValue])),failing:Object.values(result.lhr.audits).filter(a=>a.score!==null&&a.score<.9&&a.details).map(a=>({id:a.id,title:a.title,score:a.score,display:a.displayValue}))},null,2));}finally{await chrome.kill();}

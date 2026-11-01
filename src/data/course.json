@@ -3,10 +3,7 @@
     {
       "id": 1,
       "title": "DBMS foundations",
-      "pages": [
-        4,
-        6
-      ],
+      "pages": [4, 6],
       "intro": "Understand what a database system is responsible for before you start writing queries.",
       "learn": [
         [
@@ -97,10 +94,7 @@
     {
       "id": 2,
       "title": "Relational model & ER design",
-      "pages": [
-        7,
-        9
-      ],
+      "pages": [7, 9],
       "intro": "Turn real-world relationships into tables with keys and integrity rules.",
       "learn": [
         [
@@ -196,10 +190,7 @@
     {
       "id": 3,
       "title": "Relational algebra & calculus",
-      "pages": [
-        10,
-        11
-      ],
+      "pages": [10, 11],
       "intro": "Describe query results precisely, using both operations and logical conditions.",
       "learn": [
         [
@@ -290,10 +281,7 @@
     {
       "id": 4,
       "title": "SQL problem solving",
-      "pages": [
-        12,
-        15
-      ],
+      "pages": [12, 15],
       "intro": "Build queries from the required output, then test the edge cases.",
       "learn": [
         [
@@ -374,11 +362,7 @@
       "quiz": [
         {
           "prompt": "Which clause filters aggregate groups?",
-          "options": [
-            "WHERE",
-            "HAVING",
-            "ORDER BY"
-          ],
+          "options": ["WHERE", "HAVING", "ORDER BY"],
           "correct": 1,
           "explanation": "HAVING is evaluated on groups after GROUP BY; WHERE filters individual input rows."
         },
@@ -399,10 +383,7 @@
     {
       "id": 5,
       "title": "FDs & normalization",
-      "pages": [
-        16,
-        18
-      ],
+      "pages": [16, 18],
       "intro": "Find the dependencies first; justify keys, normal forms and decompositions.",
       "learn": [
         [
@@ -478,11 +459,7 @@
       "quiz": [
         {
           "prompt": "For A → B, B → C, A → D in R(A,B,C,D), what is A+?",
-          "options": [
-            "AB only",
-            "ABC only",
-            "ABCD"
-          ],
+          "options": ["AB only", "ABC only", "ABCD"],
           "correct": 2,
           "explanation": "A gives B and D; B then gives C. The fixed point is all four attributes."
         },
@@ -503,10 +480,7 @@
     {
       "id": 6,
       "title": "Storage, indexing & hashing",
-      "pages": [
-        19,
-        20
-      ],
+      "pages": [19, 20],
       "intro": "Reason about pages and access paths rather than assuming every index helps.",
       "learn": [
         [
@@ -577,11 +551,7 @@
       "quiz": [
         {
           "prompt": "Under the worked example assumptions, 1,000 records occupy how many blocks?",
-          "options": [
-            "24",
-            "25",
-            "40"
-          ],
+          "options": ["24", "25", "40"],
           "correct": 1,
           "explanation": "Each block holds floor(4096/100)=40 records; ceil(1000/40)=25 blocks."
         },
@@ -602,10 +572,7 @@
     {
       "id": 7,
       "title": "Query processing & optimization",
-      "pages": [
-        21,
-        22
-      ],
+      "pages": [21, 22],
       "intro": "Understand the plan, record a baseline and measure one change at a time.",
       "learn": [
         [
@@ -696,10 +663,7 @@
     {
       "id": 8,
       "title": "Transactions, concurrency & recovery",
-      "pages": [
-        23,
-        25
-      ],
+      "pages": [23, 25],
       "intro": "Protect invariants, analyze interleavings and explain recovery after failure.",
       "learn": [
         [
@@ -800,10 +764,7 @@
     {
       "id": 9,
       "title": "Nirma practical laboratory",
-      "pages": [
-        26,
-        30
-      ],
+      "pages": [26, 30],
       "intro": "Track all ten lab groups and save runnable scripts plus observed results.",
       "learn": [
         [
@@ -899,11 +860,7 @@
         },
         {
           "prompt": "Which join condition matches customer with its salesperson?",
-          "options": [
-            "s.snum = c.snum",
-            "s.city = c.cname",
-            "s.snum = c.cnum"
-          ],
+          "options": ["s.snum = c.snum", "s.city = c.cname", "s.snum = c.cnum"],
           "correct": 0,
           "explanation": "The customer.snum foreign-key relationship points to salespeople.snum."
         }
@@ -914,10 +871,7 @@
     {
       "id": 10,
       "title": "MongoDB & NoSQL practical",
-      "pages": [
-        31,
-        32
-      ],
+      "pages": [31, 32],
       "intro": "Learn the document model and demonstrate CRUD without treating it as SQL in another syntax.",
       "learn": [
         [
@@ -988,11 +942,7 @@
       "quiz": [
         {
           "prompt": "Which operator sets a field during updateOne?",
-          "options": [
-            "$set",
-            "$join",
-            "$table"
-          ],
+          "options": ["$set", "$join", "$table"],
           "correct": 0,
           "explanation": "$set updates the specified field values in a document."
         },
@@ -1013,10 +963,7 @@
     {
       "id": 11,
       "title": "Nine-week roadmap & video tracker",
-      "pages": [
-        33,
-        36
-      ],
+      "pages": [33, 36],
       "intro": "Keep the chapter workflow while tracking the handbook’s exact assigned lecture numbers.",
       "learn": [
         [
@@ -1881,20 +1828,11 @@
           "groups": [
             {
               "title": "Fundamentals & architecture",
-              "ids": [
-                "video-1",
-                "video-2",
-                "video-3",
-                "video-4"
-              ]
+              "ids": ["video-1", "video-2", "video-3", "video-4"]
             },
             {
               "title": "Schema & data independence",
-              "ids": [
-                "video-5",
-                "video-6",
-                "video-7"
-              ]
+              "ids": ["video-5", "video-6", "video-7"]
             }
           ]
         },
@@ -1904,21 +1842,11 @@
           "groups": [
             {
               "title": "Keys & constraints",
-              "ids": [
-                "video-8",
-                "video-9",
-                "video-10",
-                "video-11"
-              ]
+              "ids": ["video-8", "video-9", "video-10", "video-11"]
             },
             {
               "title": "Foreign keys",
-              "ids": [
-                "video-12",
-                "video-13",
-                "video-14",
-                "video-15"
-              ]
+              "ids": ["video-12", "video-13", "video-14", "video-15"]
             },
             {
               "title": "ER attributes & cardinalities",
@@ -1932,11 +1860,7 @@
             },
             {
               "title": "Weak entities & ER problems",
-              "ids": [
-                "video-21",
-                "video-22",
-                "video-23"
-              ]
+              "ids": ["video-21", "video-22", "video-23"]
             }
           ]
         },
@@ -1970,16 +1894,11 @@
             },
             {
               "title": "Division & problems",
-              "ids": [
-                "video-43",
-                "video-44"
-              ]
+              "ids": ["video-43", "video-44"]
             },
             {
               "title": "Tuple relational calculus",
-              "ids": [
-                "video-47"
-              ]
+              "ids": ["video-47"]
             }
           ]
         },
@@ -1989,12 +1908,7 @@
           "groups": [
             {
               "title": "SQL families & constraints",
-              "ids": [
-                "video-60",
-                "video-61",
-                "video-62",
-                "video-63"
-              ]
+              "ids": ["video-60", "video-61", "video-62", "video-63"]
             },
             {
               "title": "CREATE & ALTER",
@@ -2034,19 +1948,11 @@
             },
             {
               "title": "Order, aggregates & NULL",
-              "ids": [
-                "video-79",
-                "video-80",
-                "video-81"
-              ]
+              "ids": ["video-79", "video-80", "video-81"]
             },
             {
               "title": "Subqueries & joins",
-              "ids": [
-                "video-82",
-                "video-83",
-                "video-84"
-              ]
+              "ids": ["video-82", "video-83", "video-84"]
             },
             {
               "title": "Problems, functions & cleaning",
@@ -2060,11 +1966,7 @@
             },
             {
               "title": "Views & objects",
-              "ids": [
-                "video-132",
-                "video-133",
-                "video-134"
-              ]
+              "ids": ["video-132", "video-133", "video-134"]
             }
           ]
         },
@@ -2074,30 +1976,19 @@
           "groups": [
             {
               "title": "Anomalies",
-              "ids": [
-                "video-24"
-              ]
+              "ids": ["video-24"]
             },
             {
               "title": "FDs & closure",
-              "ids": [
-                "video-32",
-                "video-33"
-              ]
+              "ids": ["video-32", "video-33"]
             },
             {
               "title": "1NF & 2NF",
-              "ids": [
-                "video-41",
-                "video-42"
-              ]
+              "ids": ["video-41", "video-42"]
             },
             {
               "title": "3NF & BCNF",
-              "ids": [
-                "video-45",
-                "video-46"
-              ]
+              "ids": ["video-45", "video-46"]
             },
             {
               "title": "Higher forms & decomposition",
@@ -2124,33 +2015,19 @@
           "groups": [
             {
               "title": "Indexing & I/O",
-              "ids": [
-                "video-110",
-                "video-111",
-                "video-112",
-                "video-113"
-              ]
+              "ids": ["video-110", "video-111", "video-112", "video-113"]
             },
             {
               "title": "Index categories",
-              "ids": [
-                "video-114",
-                "video-115",
-                "video-116"
-              ]
+              "ids": ["video-114", "video-115", "video-116"]
             },
             {
               "title": "Log recovery",
-              "ids": [
-                "video-117",
-                "video-118"
-              ]
+              "ids": ["video-117", "video-118"]
             },
             {
               "title": "RAID overview",
-              "ids": [
-                "video-119"
-              ]
+              "ids": ["video-119"]
             },
             {
               "title": "B-tree & B+ tree",
@@ -2170,53 +2047,27 @@
           "groups": [
             {
               "title": "ACID & states",
-              "ids": [
-                "video-90",
-                "video-91",
-                "video-92"
-              ]
+              "ids": ["video-90", "video-91", "video-92"]
             },
             {
               "title": "Schedules & concurrency",
-              "ids": [
-                "video-93",
-                "video-94",
-                "video-95",
-                "video-96"
-              ]
+              "ids": ["video-93", "video-94", "video-95", "video-96"]
             },
             {
               "title": "Locking & 2PL",
-              "ids": [
-                "video-97",
-                "video-98",
-                "video-99",
-                "video-100"
-              ]
+              "ids": ["video-97", "video-98", "video-99", "video-100"]
             },
             {
               "title": "Recoverability",
-              "ids": [
-                "video-101",
-                "video-102"
-              ]
+              "ids": ["video-101", "video-102"]
             },
             {
               "title": "Serializability",
-              "ids": [
-                "video-103",
-                "video-104",
-                "video-105",
-                "video-106"
-              ]
+              "ids": ["video-103", "video-104", "video-105", "video-106"]
             },
             {
               "title": "2PL variants & timestamps",
-              "ids": [
-                "video-107",
-                "video-108",
-                "video-109"
-              ]
+              "ids": ["video-107", "video-108", "video-109"]
             }
           ]
         }
@@ -2226,10 +2077,7 @@
     {
       "id": 12,
       "title": "Practice, projects & mastery",
-      "pages": [
-        37,
-        38
-      ],
+      "pages": [37, 38],
       "intro": "Collect evidence that you can work independently, then revisit the weak areas.",
       "learn": [
         [
@@ -2345,10 +2193,7 @@
     {
       "id": 13,
       "title": "Database engineering & resources",
-      "pages": [
-        39,
-        41
-      ],
+      "pages": [39, 41],
       "intro": "Connect course concepts to secure, measurable, recoverable systems.",
       "learn": [
         [
@@ -2504,10 +2349,7 @@
     }
   ],
   "references": [
-    [
-      "Gate Smashers roadmap",
-      "https://www.gatesmashers.com/roadmaps/dbms-sql"
-    ],
+    ["Gate Smashers roadmap", "https://www.gatesmashers.com/roadmaps/dbms-sql"],
     [
       "Gate Smashers playlist",
       "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y"
@@ -2524,30 +2366,15 @@
       "NPTEL DBMS",
       "https://onlinecourses.nptel.ac.in/e-learning/preview/noc20_cs60"
     ],
-    [
-      "SQLBolt",
-      "https://sqlbolt.com/"
-    ],
-    [
-      "PGExercises",
-      "https://pgexercises.com/"
-    ],
+    ["SQLBolt", "https://sqlbolt.com/"],
+    ["PGExercises", "https://pgexercises.com/"],
     [
       "Oracle FreeSQL",
       "https://www.oracle.com/database/technologies/oracle-free-sql/"
     ],
-    [
-      "PostgreSQL downloads",
-      "https://www.postgresql.org/download/"
-    ],
-    [
-      "PostgreSQL documentation",
-      "https://www.postgresql.org/docs/"
-    ],
-    [
-      "DBeaver Community",
-      "https://dbeaver.io/download/"
-    ],
+    ["PostgreSQL downloads", "https://www.postgresql.org/download/"],
+    ["PostgreSQL documentation", "https://www.postgresql.org/docs/"],
+    ["DBeaver Community", "https://dbeaver.io/download/"],
     [
       "MongoDB introduction",
       "https://learn.mongodb.com/learning-paths/introduction-to-mongodb"
@@ -2556,22 +2383,10 @@
       "MongoDB CRUD course",
       "https://learn.mongodb.com/courses/crud-operations-in-mongodb"
     ],
-    [
-      "MongoDB Community",
-      "https://www.mongodb.com/try/download/community"
-    ],
-    [
-      "MongoDB Compass",
-      "https://www.mongodb.com/try/download/compass"
-    ],
-    [
-      "LeetCode SQL 50",
-      "https://leetcode.com/studyplan/top-sql-50/"
-    ],
-    [
-      "Database System Concepts",
-      "https://www.db-book.com/"
-    ],
+    ["MongoDB Community", "https://www.mongodb.com/try/download/community"],
+    ["MongoDB Compass", "https://www.mongodb.com/try/download/compass"],
+    ["LeetCode SQL 50", "https://leetcode.com/studyplan/top-sql-50/"],
+    ["Database System Concepts", "https://www.db-book.com/"],
     [
       "Fundamentals of Database Systems",
       "https://www.pearson.com/en-us/subject-catalog/p/fundamentals-of-database-systems/P200000003282/9780133970777"

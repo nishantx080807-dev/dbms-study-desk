@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dbms-study-desk.vercel.app/sitemap.xml

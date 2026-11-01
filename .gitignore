@@ -4,3 +4,4 @@ dist/
 output/
 .superpowers/
 *.local
+*.tsbuildinfo

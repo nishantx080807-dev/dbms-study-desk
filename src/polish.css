@@ -1,0 +1,93 @@
+.overview-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: -36px;
+  margin-bottom: 40px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.overview-meta > span,
+.overview-meta > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.overview-meta strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+.overview-meta > button {
+  background: none;
+  border: 0;
+  padding: 10px 0;
+  min-height: 44px;
+  font-size: 11px;
+}
+.overview-meta > button:hover {
+  color: var(--accent);
+}
+.path-filter select {
+  font-size: 11px;
+  min-height: 44px;
+  background: var(--background);
+  padding: 10px;
+}
+.stats-strip > div > div > span:first-child {
+  font-variant-numeric: tabular-nums;
+  min-width: 1.4ch;
+}
+.code-toolbar .button {
+  min-height: 44px;
+}
+.checklist-filter select {
+  min-height: 44px;
+}
+.main-content:has(> .skeleton) {
+  min-height: 1100px;
+}
+@media (max-width: 700px) {
+  .overview-meta {
+    margin-top: -24px;
+    margin-bottom: 28px;
+    font-size: 10px;
+    gap: 12px;
+  }
+  .overview-meta > button {
+    font-size: 10px;
+  }
+  .path-filter select {
+    font-size: 11px;
+  }
+  .topbar-actions > .icon-button {
+    width: 44px;
+    padding: 10px;
+  }
+}
+.entity {
+  animation: schema-drift 6s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  animation-play-state: var(--animation-state, running);
+}
+.entity-courses {
+  animation-delay: -2s;
+}
+.entity-enrollments {
+  animation-delay: -4s;
+}
+@keyframes schema-drift {
+  from {
+    transform: translateY(-3px);
+  }
+  to {
+    transform: translateY(3px);
+  }
+}
+.sql-sidebar-label {
+  color: var(--muted) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .entity {
+    animation: none;
+  }
+}

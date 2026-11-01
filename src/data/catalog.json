@@ -1,0 +1,2382 @@
+{
+  "chapters": [
+    {
+      "id": 1,
+      "title": "DBMS foundations",
+      "pages": [4, 6],
+      "intro": "Understand what a database system is responsible for before you start writing queries.",
+      "learn": [
+        [
+          "Database, DBMS and SQL",
+          "The database is the organized data; the DBMS manages it; SQL is a language used to request operations. An RDBMS follows the relational model."
+        ],
+        [
+          "Three-schema architecture",
+          "External views describe what users see; the conceptual schema describes logical structure; the internal schema describes storage. Physical independence shields the logical schema from storage changes. Logical independence shields views and applications from conceptual changes."
+        ],
+        [
+          "People and deployment",
+          "A DBA manages access, availability, schema, performance and recovery. A three-tier application places application logic between the client and the DBMS. Relational, document, key-value, column-family and graph models suit different access patterns."
+        ]
+      ],
+      "example": "Student view: my marks only\nConceptual schema: Student, Course, Enrollment\nInternal storage: pages and a B+ tree index\n\nAdding the index without changing application queries\nis an example of physical data independence.",
+      "recall": [
+        "Why is SQL not a DBMS?",
+        "SQL is a language. A DBMS parses and executes it while managing storage, transactions, authorization and recovery."
+      ],
+      "tasks": [
+        {
+          "id": "c1-t1",
+          "kind": "Learn",
+          "text": "Explain database, DBMS, RDBMS and SQL with one example each."
+        },
+        {
+          "id": "c1-t2",
+          "kind": "Learn",
+          "text": "Compare flat files with DBMS constraints, concurrency and recovery."
+        },
+        {
+          "id": "c1-t3",
+          "kind": "Recall",
+          "text": "Draw external, conceptual and internal schemas without notes."
+        },
+        {
+          "id": "c1-t4",
+          "kind": "Recall",
+          "text": "Distinguish physical and logical data independence."
+        },
+        {
+          "id": "c1-t5",
+          "kind": "Practice",
+          "text": "Draw two-tier and three-tier architectures; place application logic."
+        },
+        {
+          "id": "c1-t6",
+          "kind": "Learn",
+          "text": "Describe database users, DBA responsibilities and the main data models."
+        },
+        {
+          "id": "c1-t7",
+          "kind": "Practice",
+          "text": "Answer 15 short questions and draw three architecture/model diagrams."
+        },
+        {
+          "id": "c1-t8",
+          "kind": "Review",
+          "text": "Explain Unit I aloud without notes and correct weak answers."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Which change demonstrates physical data independence?",
+          "options": [
+            "Adding an index while application queries stay unchanged",
+            "Renaming a column used by every application",
+            "Changing an API response format"
+          ],
+          "correct": 0,
+          "explanation": "An index changes the internal access structure without requiring a conceptual schema or application query change."
+        },
+        {
+          "prompt": "Where does business logic usually belong in a three-tier web application?",
+          "options": [
+            "Inside the browser database credentials",
+            "In the application/API server",
+            "Only in the database files"
+          ],
+          "correct": 1,
+          "explanation": "The application/API server sits between the client and database and handles business rules and validation."
+        }
+      ],
+      "practice": "Draw the architecture of a student results portal. Explain who can see which data, where validation runs, and what happens after a crash."
+    },
+    {
+      "id": 2,
+      "title": "Relational model & ER design",
+      "pages": [7, 9],
+      "intro": "Turn real-world relationships into tables with keys and integrity rules.",
+      "learn": [
+        [
+          "Rows, columns and keys",
+          "A relation is a set of tuples over attributes and domains. A superkey uniquely identifies tuples; a candidate key is a minimal superkey. A primary key is a chosen candidate key. A foreign key references an eligible key."
+        ],
+        [
+          "Constraints and NULL",
+          "Primary-key columns cannot be NULL. A foreign key may be nullable unless NOT NULL is also specified. NULL represents missing or unknown information; use IS NULL. COUNT(column) ignores NULL; COUNT(*) counts rows."
+        ],
+        [
+          "Map relationships deliberately",
+          "A 1:N relationship normally places the foreign key on the many side. M:N needs a junction relation. A multivalued attribute usually gets a separate relation. Weak entities use owner keys plus partial keys."
+        ]
+      ],
+      "example": "Student(student_id PK, name, department)\nCourse(course_id PK, title, credits)\nEnrollment(student_id FK, course_id FK, enrolled_on, grade)\nPRIMARY KEY (student_id, course_id)\n\nEnrollment resolves the M:N relationship and stores\nfacts about each student-course association.",
+      "recall": [
+        "Is every superkey a candidate key?",
+        "No. Candidate keys are minimal: removing any attribute destroys uniqueness. A superkey may include unnecessary attributes."
+      ],
+      "tasks": [
+        {
+          "id": "c2-t1",
+          "kind": "Learn",
+          "text": "Define relation, tuple, attribute, domain, schema and instance."
+        },
+        {
+          "id": "c2-t2",
+          "kind": "Recall",
+          "text": "Identify superkeys, candidate, primary, alternate and composite keys."
+        },
+        {
+          "id": "c2-t3",
+          "kind": "Practice",
+          "text": "Explain domain, entity and referential integrity using invalid row examples."
+        },
+        {
+          "id": "c2-t4",
+          "kind": "Practice",
+          "text": "Predict NULL comparisons and COUNT(*) versus COUNT(column)."
+        },
+        {
+          "id": "c2-t5",
+          "kind": "Learn",
+          "text": "Identify entities, attributes, weak entities and relationship cardinalities."
+        },
+        {
+          "id": "c2-t6",
+          "kind": "Practice",
+          "text": "Map 1:1, 1:N, M:N and multivalued attributes into relations."
+        },
+        {
+          "id": "c2-t7",
+          "kind": "Practice",
+          "text": "Draw three ER scenarios: college, e-commerce and library."
+        },
+        {
+          "id": "c2-t8",
+          "kind": "Practice",
+          "text": "Convert three ER diagrams into tables with explicit PK/FK constraints."
+        },
+        {
+          "id": "c2-t9",
+          "kind": "Review",
+          "text": "Convert an unseen ER diagram without help and justify every key."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "A student can take many courses and a course has many students. What resolves this?",
+          "options": [
+            "A course_1, course_2, course_3 set of Student columns",
+            "An Enrollment junction table",
+            "One shared student name column"
+          ],
+          "correct": 1,
+          "explanation": "Enrollment links Student and Course and can store relationship facts such as the grade."
+        },
+        {
+          "prompt": "What distinguishes a candidate key from a general superkey?",
+          "options": [
+            "It has exactly one attribute",
+            "It is always numeric",
+            "It is minimal"
+          ],
+          "correct": 2,
+          "explanation": "A candidate key has no proper subset that remains a superkey; it may be composite."
+        }
+      ],
+      "practice": "Design a library with Member, Book, Copy and Loan. Distinguish a title from a physical copy and record the assumptions behind each relationship."
+    },
+    {
+      "id": 3,
+      "title": "Relational algebra & calculus",
+      "pages": [10, 11],
+      "intro": "Describe query results precisely, using both operations and logical conditions.",
+      "learn": [
+        [
+          "Relational operators",
+          "Selection chooses rows; projection chooses attributes and removes duplicate tuples in the pure relational model. Set operations require compatible relations. Rename supports unambiguous self-joins. Division expresses “for every” relationships."
+        ],
+        [
+          "Composition and closure",
+          "An algebra operator returns a relation, so its result can feed another operator. Build expressions step by step and state intermediate schemas. Do not confuse algebra closure with attribute closure under FDs."
+        ],
+        [
+          "Calculus",
+          "TRC variables range over tuples; DRC variables range over attribute values. Existential and universal quantifiers express existence and all-values conditions. Safe expressions restrict results to an appropriate database-derived domain."
+        ]
+      ],
+      "example": "Goal: names of students enrolled in DBMS.\n1. Join Student and Enrollment on student_id.\n2. Join Course on course_id.\n3. Select title = \"DBMS\".\n4. Project Student.name.\n\nTRC uses tuple variables for those matching rows.\nDRC uses domain variables for sid, name, dept and cid.",
+      "recall": [
+        "Which operator suits “students enrolled in every required course”?",
+        "Relational division, or an equivalent expression using other operators. In calculus, use an appropriate universal condition or the absence of a missing required course."
+      ],
+      "tasks": [
+        {
+          "id": "c3-t1",
+          "kind": "Learn",
+          "text": "Explain selection, projection, rename and Cartesian product."
+        },
+        {
+          "id": "c3-t2",
+          "kind": "Practice",
+          "text": "Check union compatibility before union, difference or intersection."
+        },
+        {
+          "id": "c3-t3",
+          "kind": "Practice",
+          "text": "Write five selection/projection and five join expressions."
+        },
+        {
+          "id": "c3-t4",
+          "kind": "Practice",
+          "text": "Solve three division queries and explain the universal condition."
+        },
+        {
+          "id": "c3-t5",
+          "kind": "Recall",
+          "text": "Explain relational closure and instructor notation for updates."
+        },
+        {
+          "id": "c3-t6",
+          "kind": "Learn",
+          "text": "Distinguish TRC and DRC, free/bound variables and quantifiers."
+        },
+        {
+          "id": "c3-t7",
+          "kind": "Practice",
+          "text": "Write five TRC and five DRC expressions; check safety."
+        },
+        {
+          "id": "c3-t8",
+          "kind": "Review",
+          "text": "Translate an unseen written query into algebra and calculus."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "In pure relational algebra, projection does what?",
+          "options": [
+            "Chooses columns and eliminates duplicate tuples",
+            "Chooses only rows",
+            "Always preserves all duplicates"
+          ],
+          "correct": 0,
+          "explanation": "Projection returns a relation over selected attributes; relations in the pure model are sets."
+        },
+        {
+          "prompt": "What do DRC variables range over?",
+          "options": [
+            "Entire tables only",
+            "Individual attribute values",
+            "Database servers"
+          ],
+          "correct": 1,
+          "explanation": "Domain relational calculus uses variables representing individual domain/attribute values."
+        }
+      ],
+      "practice": "For Student, Enrollment and Course, find students with no enrollment and students enrolled in every course. Write algebra, TRC and DRC where possible."
+    },
+    {
+      "id": 4,
+      "title": "SQL problem solving",
+      "pages": [12, 15],
+      "intro": "Build queries from the required output, then test the edge cases.",
+      "learn": [
+        [
+          "Build a query in stages",
+          "Define tables and constraints, insert representative data, then filter, sort, group, join and use subqueries. Conceptual logical processing is FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY. Physical execution may differ."
+        ],
+        [
+          "Predict row behavior",
+          "WHERE filters rows; HAVING filters groups. LEFT JOIN preserves unmatched left rows with NULLs on the right. EXISTS tests whether any qualifying row exists. NOT IN can produce UNKNOWN when its comparison set contains NULL. ANY over an empty set is false; ALL over an empty set is true."
+        ],
+        [
+          "Know the dialect",
+          "Oracle-style examples use NUMBER, VARCHAR2, NVL and MINUS. PostgreSQL commonly uses NUMERIC, VARCHAR, COALESCE and EXCEPT. A normal view stores a query; a materialized view stores results. Indexes cost storage and write maintenance."
+        ]
+      ],
+      "example": "SELECT snum, COUNT(*) AS order_count, SUM(amt) AS total_sales\nFROM orders\nWHERE amt > 100\nGROUP BY snum\nHAVING SUM(amt) > 500\nORDER BY total_sales DESC;\n\nWHERE removes individual low-value orders first.\nHAVING then removes groups with total sales <= 500.",
+      "recall": [
+        "Why can NOT EXISTS be easier to reason about than NOT IN?",
+        "NOT IN can become UNKNOWN if its subquery contains NULL. A correlated NOT EXISTS explicitly tests whether any matching row exists; still verify the intended key and NULL semantics."
+      ],
+      "tasks": [
+        {
+          "id": "c4-t1",
+          "kind": "Learn",
+          "text": "Classify DDL, DML, DQL, DCL and TCL by actual purpose."
+        },
+        {
+          "id": "c4-t2",
+          "kind": "Practice",
+          "text": "Create tables; insert edge cases; use ALTER, UPDATE and DELETE correctly."
+        },
+        {
+          "id": "c4-t3",
+          "kind": "Practice",
+          "text": "Write WHERE, ORDER BY, LIKE, IN, BETWEEN and IS NULL queries."
+        },
+        {
+          "id": "c4-t4",
+          "kind": "Practice",
+          "text": "Use COUNT, SUM, AVG, MIN, MAX, GROUP BY and HAVING."
+        },
+        {
+          "id": "c4-t5",
+          "kind": "Practice",
+          "text": "Write inner, left, right, full outer, cross and self joins."
+        },
+        {
+          "id": "c4-t6",
+          "kind": "Practice",
+          "text": "Solve correlated subqueries, EXISTS/NOT EXISTS and ANY/ALL queries."
+        },
+        {
+          "id": "c4-t7",
+          "kind": "Practice",
+          "text": "Compare UNION/UNION ALL, INTERSECT and MINUS/EXCEPT."
+        },
+        {
+          "id": "c4-t8",
+          "kind": "Practice",
+          "text": "Use numeric, string, date and NULL-handling functions."
+        },
+        {
+          "id": "c4-t9",
+          "kind": "Practice",
+          "text": "Create and query a view; distinguish materialized views and indexes."
+        },
+        {
+          "id": "c4-t10",
+          "kind": "Practice",
+          "text": "Demonstrate COMMIT, ROLLBACK, SAVEPOINT and SET TRANSACTION."
+        },
+        {
+          "id": "c4-t11",
+          "kind": "Review",
+          "text": "Solve 15 unseen SQL questions and explain duplicate and NULL behavior."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Which clause filters aggregate groups?",
+          "options": ["WHERE", "HAVING", "ORDER BY"],
+          "correct": 1,
+          "explanation": "HAVING is evaluated on groups after GROUP BY; WHERE filters individual input rows."
+        },
+        {
+          "prompt": "A LEFT JOIN has no right-side match for a left row. What happens?",
+          "options": [
+            "The left row disappears",
+            "The entire query fails",
+            "The left row remains with NULL right-side fields"
+          ],
+          "correct": 2,
+          "explanation": "A LEFT JOIN preserves all left-side rows, including those without matches."
+        }
+      ],
+      "practice": "Write 50 queries across the SQL categories. Include a customer with no orders, repeated dates, and permitted NULLs. Predict results before executing in your DBMS."
+    },
+    {
+      "id": 5,
+      "title": "FDs & normalization",
+      "pages": [16, 18],
+      "intro": "Find the dependencies first; justify keys, normal forms and decompositions.",
+      "learn": [
+        [
+          "FDs and attribute closure",
+          "X → Y says equal X values imply equal Y values in all valid instances. To compute X+, start with X and repeatedly add FD right sides whose left sides are already included. A superkey closure covers the whole relation; check minimality for a candidate key."
+        ],
+        [
+          "Normal forms",
+          "1NF uses atomic values under the chosen domains. 2NF excludes partial dependency of a non-prime attribute on a proper subset of any candidate key. 3NF requires each nontrivial X → A to have a superkey determinant or a prime A. BCNF always requires the nontrivial determinant to be a superkey. 4NF and 5NF address multivalued and join dependencies."
+        ],
+        [
+          "Decomposition properties",
+          "A minimal cover removes extraneous attributes and redundant FDs after splitting right sides. For binary losslessness, the intersection must determine one whole component under F+. Dependency preservation means checking the components locally is sufficient to enforce the original FDs. These are different properties."
+        ]
+      ],
+      "example": "R(A, B, C, D), F = { A → B, B → C, A → D }\nA+ = ABCD, so A is a candidate key.\nB+ = BC, so B is not a superkey.\nB → C violates 3NF: B is not a superkey; C is non-prime.\nAssuming 1NF, the highest normal form is 2NF.\n\nDecompose into R1(B,C) and R2(A,B,D).\nTheir intersection B determines R1, so this is lossless.",
+      "recall": [
+        "Can a decomposition be lossless without preserving all FDs?",
+        "Yes. Losslessness concerns reconstructing the original relation without spurious tuples. Dependency preservation concerns enforcing the original FDs locally. BCNF decompositions can sacrifice dependency preservation."
+      ],
+      "tasks": [
+        {
+          "id": "c5-t1",
+          "kind": "Learn",
+          "text": "Explain insertion, deletion and update anomalies."
+        },
+        {
+          "id": "c5-t2",
+          "kind": "Recall",
+          "text": "State FD meaning and Armstrong inference principles."
+        },
+        {
+          "id": "c5-t3",
+          "kind": "Practice",
+          "text": "Compute 10 attribute closures and show every iteration."
+        },
+        {
+          "id": "c5-t4",
+          "kind": "Practice",
+          "text": "Find all candidate keys in 10 problems and prove minimality."
+        },
+        {
+          "id": "c5-t5",
+          "kind": "Practice",
+          "text": "Identify prime attributes and test 1NF, 2NF, 3NF and BCNF."
+        },
+        {
+          "id": "c5-t6",
+          "kind": "Learn",
+          "text": "Explain the motivation for 4NF and 5NF."
+        },
+        {
+          "id": "c5-t7",
+          "kind": "Practice",
+          "text": "Compute five minimal covers with removal justifications."
+        },
+        {
+          "id": "c5-t8",
+          "kind": "Practice",
+          "text": "Test five decompositions for losslessness."
+        },
+        {
+          "id": "c5-t9",
+          "kind": "Practice",
+          "text": "Test five decompositions for dependency preservation."
+        },
+        {
+          "id": "c5-t10",
+          "kind": "Review",
+          "text": "Solve a full unseen FD → key → normal form → decomposition problem."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "For A → B, B → C, A → D in R(A,B,C,D), what is A+?",
+          "options": ["AB only", "ABC only", "ABCD"],
+          "correct": 2,
+          "explanation": "A gives B and D; B then gives C. The fixed point is all four attributes."
+        },
+        {
+          "prompt": "BCNF requires what for every nontrivial FD X → Y?",
+          "options": [
+            "X must be a superkey",
+            "Y must be non-prime",
+            "X must have one attribute"
+          ],
+          "correct": 0,
+          "explanation": "BCNF strengthens the determinant condition: every nontrivial FD must have a superkey on the left."
+        }
+      ],
+      "practice": "For R(A,B,C,D,E), F={A→BC, B→D, CD→E}, find all candidate keys, compute a minimal cover and justify a decomposition."
+    },
+    {
+      "id": 6,
+      "title": "Storage, indexing & hashing",
+      "pages": [19, 20],
+      "intro": "Reason about pages and access paths rather than assuming every index helps.",
+      "learn": [
+        [
+          "Files and I/O",
+          "Heap files favor simple insertion, ordered files support ordering/ranges, and hash organization maps equality keys to buckets. State record-size, block-size and overhead assumptions in numerical problems."
+        ],
+        [
+          "Indexes and trees",
+          "Classical primary, clustering and secondary index terminology depends on file order. Dense and sparse indexes differ in entry coverage. B+ tree internal nodes direct search, while leaf data entries and leaf links support range scans. State the textbook meaning of tree “order” before splitting nodes."
+        ],
+        [
+          "Choose for the workload",
+          "Static hashing manages collisions in a fixed structure; extendible hashing splits buckets with a directory; linear hashing grows gradually. Hash access does not naturally support ranges. Composite index order, selectivity, table size and maintenance cost all affect index usefulness."
+        ]
+      ],
+      "example": "Assume: 4,096-byte blocks, 100-byte fixed records,\nno overhead, and no record spanning.\nBlocking factor = floor(4096 / 100) = 40 records/block.\nFor 1,000 records: ceil(1000 / 40) = 25 data blocks.\nA full scan reads roughly 25 data blocks in this model.",
+      "recall": [
+        "Why might the optimizer ignore an available index?",
+        "A small table, an unselective predicate, expensive random lookups or the estimated cost can make a scan cheaper. Measure with representative data and current statistics."
+      ],
+      "tasks": [
+        {
+          "id": "c6-t1",
+          "kind": "Learn",
+          "text": "Compare heap, sequential, hash and clustered file organization."
+        },
+        {
+          "id": "c6-t2",
+          "kind": "Recall",
+          "text": "Define primary, clustering, secondary, dense, sparse and multilevel indexes."
+        },
+        {
+          "id": "c6-t3",
+          "kind": "Practice",
+          "text": "Solve five blocking-factor and I/O calculations with assumptions."
+        },
+        {
+          "id": "c6-t4",
+          "kind": "Practice",
+          "text": "Solve five index-level and access-cost problems."
+        },
+        {
+          "id": "c6-t5",
+          "kind": "Practice",
+          "text": "Draw five B-tree/B+ tree insertions and every split; state order conventions."
+        },
+        {
+          "id": "c6-t6",
+          "kind": "Practice",
+          "text": "Show B+ tree leaf links and trace an equality and a range search."
+        },
+        {
+          "id": "c6-t7",
+          "kind": "Practice",
+          "text": "Solve five hashing problems including collision handling."
+        },
+        {
+          "id": "c6-t8",
+          "kind": "Learn",
+          "text": "Compare static, extendible and linear hashing."
+        },
+        {
+          "id": "c6-t9",
+          "kind": "Review",
+          "text": "Justify scan versus index and hash versus tree for a fresh workload."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Under the worked example assumptions, 1,000 records occupy how many blocks?",
+          "options": ["24", "25", "40"],
+          "correct": 1,
+          "explanation": "Each block holds floor(4096/100)=40 records; ceil(1000/40)=25 blocks."
+        },
+        {
+          "prompt": "Which feature of a typical B+ tree especially helps range scans?",
+          "options": [
+            "Linked leaf nodes",
+            "A hash bucket directory",
+            "Unordered heap pages only"
+          ],
+          "correct": 0,
+          "explanation": "After locating the first key, leaf links let the scan continue in key order."
+        }
+      ],
+      "practice": "Compare equality lookup and BETWEEN queries. Choose a hash or tree structure for each, then include storage and write-maintenance costs in your explanation."
+    },
+    {
+      "id": 7,
+      "title": "Query processing & optimization",
+      "pages": [21, 22],
+      "intro": "Understand the plan, record a baseline and measure one change at a time.",
+      "learn": [
+        [
+          "The query pipeline",
+          "Parsing checks syntax, names and semantics; translation produces a logical representation; optimization explores equivalent plans; physical planning selects access and join algorithms; execution processes the data."
+        ],
+        [
+          "Algorithms and costs",
+          "Nested-loop joins can be effective with a small outer input and indexed inner access. Block nested loops reduce repeated I/O. Sort-merge joins exploit sorted inputs. Hash joins suit appropriate equi-joins and memory budgets. State I/O, memory and selectivity assumptions."
+        ],
+        [
+          "Measure and preserve correctness",
+          "EXPLAIN shows the proposed plan; EXPLAIN ANALYZE executes the query and reports observations. Compare estimates with actual rows, check expensive loops/sorts, change one factor and measure again. Tiny seed datasets do not establish production performance."
+        ]
+      ],
+      "example": "-- PostgreSQL study example; run in your database.\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT cnum, SUM(amt)\nFROM orders\nGROUP BY cnum;\n\nRecord estimated and actual rows, time, loops and buffers.\nChange one relevant factor, verify results, and re-measure.",
+      "recall": [
+        "Does SQL logical processing order force physical execution order?",
+        "No. The optimizer may transform operations and select a different physical plan as long as the required query semantics are preserved."
+      ],
+      "tasks": [
+        {
+          "id": "c7-t1",
+          "kind": "Recall",
+          "text": "Trace parsing, translation, optimization, physical planning and execution."
+        },
+        {
+          "id": "c7-t2",
+          "kind": "Learn",
+          "text": "Compare table scan, index scan and nested-loop joins."
+        },
+        {
+          "id": "c7-t3",
+          "kind": "Learn",
+          "text": "Explain block nested-loop, sort-merge and hash joins."
+        },
+        {
+          "id": "c7-t4",
+          "kind": "Practice",
+          "text": "Solve five query-plan/cost comparisons with stated assumptions."
+        },
+        {
+          "id": "c7-t5",
+          "kind": "Practice",
+          "text": "Create a representative dataset and capture a baseline plan."
+        },
+        {
+          "id": "c7-t6",
+          "kind": "Practice",
+          "text": "Compare estimated rows with actual rows and inspect loops/sorts."
+        },
+        {
+          "id": "c7-t7",
+          "kind": "Practice",
+          "text": "Try one justified index or rewrite and verify result equivalence."
+        },
+        {
+          "id": "c7-t8",
+          "kind": "Review",
+          "text": "Keep a before/after performance record and explain the trade-offs."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "What does EXPLAIN ANALYZE do?",
+          "options": [
+            "Only displays a hypothetical plan and never runs SQL",
+            "Runs the query and reports execution observations",
+            "Automatically creates every missing index"
+          ],
+          "correct": 1,
+          "explanation": "EXPLAIN ANALYZE executes its statement. Use it with awareness of the statement and workload."
+        },
+        {
+          "prompt": "When can a table scan be reasonable?",
+          "options": [
+            "When a query returns most rows",
+            "Never if any index exists",
+            "Only when a table has no primary key"
+          ],
+          "correct": 0,
+          "explanation": "Reading most of a table sequentially can be cheaper than many index-driven lookups."
+        }
+      ],
+      "practice": "Record a query plan before and after an index on a representative dataset. Compare results and timings and explain whether the change is worth its write cost."
+    },
+    {
+      "id": 8,
+      "title": "Transactions, concurrency & recovery",
+      "pages": [23, 25],
+      "intro": "Protect invariants, analyze interleavings and explain recovery after failure.",
+      "learn": [
+        [
+          "ACID and states",
+          "Atomicity makes the logical operation all-or-nothing; consistency preserves declared invariants; isolation defines concurrent visibility; durability protects committed effects under the system guarantees. Study active, partially committed, committed, failed and aborted states."
+        ],
+        [
+          "Schedules and concurrency",
+          "Conflicts involve different transactions on the same item with at least one write. Add precedence edges in operation order: an acyclic graph means conflict serializability. Strict ⇒ cascadeless ⇒ recoverable. Two-phase locking ensures conflict serializability but can deadlock. Timestamp ordering and MVCC use different mechanisms."
+        ],
+        [
+          "Recovery",
+          "WAL requires the relevant log record to be durable before its changed page is written. UNDO reverses uncommitted effects and REDO reapplies committed effects when required. Simplified deferred/immediate update models, checkpoints and actual engine isolation behavior must be distinguished."
+        ]
+      ],
+      "example": "Schedule: r1(X), w2(X), w1(X)\nConflict r1(X) before w2(X): T1 → T2\nConflict w2(X) before w1(X): T2 → T1\nThe cycle means NOT conflict-serializable.\n\nRead/read alone would not create a conflict edge.",
+      "recall": [
+        "Does two-phase locking guarantee freedom from deadlock?",
+        "No. It guarantees conflict serializability. Transactions can still wait cyclically for locks unless an additional prevention or detection strategy is used."
+      ],
+      "tasks": [
+        {
+          "id": "c8-t1",
+          "kind": "Recall",
+          "text": "Explain ACID with an account-transfer invariant and transaction states."
+        },
+        {
+          "id": "c8-t2",
+          "kind": "Practice",
+          "text": "Identify conflicts; exclude read/read pairs."
+        },
+        {
+          "id": "c8-t3",
+          "kind": "Practice",
+          "text": "Solve 10 precedence graphs and find serial orders or cycles."
+        },
+        {
+          "id": "c8-t4",
+          "kind": "Learn",
+          "text": "Distinguish conflict serializability from view serializability."
+        },
+        {
+          "id": "c8-t5",
+          "kind": "Practice",
+          "text": "Solve five recoverability/cascadeless/strict schedule problems."
+        },
+        {
+          "id": "c8-t6",
+          "kind": "Practice",
+          "text": "Solve five lock/timestamp problems and explain 2PL variants."
+        },
+        {
+          "id": "c8-t7",
+          "kind": "Learn",
+          "text": "Explain deadlock detection/prevention, timestamp ordering and MVCC."
+        },
+        {
+          "id": "c8-t8",
+          "kind": "Practice",
+          "text": "Solve five UNDO/REDO log problems and explain WAL/checkpoints."
+        },
+        {
+          "id": "c8-t9",
+          "kind": "Learn",
+          "text": "Compare isolation levels with the DBMS-specific behavior caveat."
+        },
+        {
+          "id": "c8-t10",
+          "kind": "Review",
+          "text": "Analyze an unseen schedule and justify correctness and recovery."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Which operations do NOT conflict?",
+          "options": [
+            "Two reads by different transactions on the same item",
+            "A read then a write by different transactions on the same item",
+            "Two writes by different transactions on the same item"
+          ],
+          "correct": 0,
+          "explanation": "Neither read changes the item, so read/read order is not a conflict."
+        },
+        {
+          "prompt": "A precedence graph contains a directed cycle. What follows?",
+          "options": [
+            "The schedule is always recoverable",
+            "It is not conflict-serializable",
+            "It must be a deadlock in a running DBMS"
+          ],
+          "correct": 1,
+          "explanation": "A cycle disproves conflict serializability. A precedence graph is distinct from a lock wait-for graph."
+        }
+      ],
+      "practice": "Draw graphs for ten schedules, then classify recoverability independently. A serializability answer alone does not establish recovery safety."
+    },
+    {
+      "id": 9,
+      "title": "Nirma practical laboratory",
+      "pages": [26, 30],
+      "intro": "Track all ten lab groups and save runnable scripts plus observed results.",
+      "learn": [
+        [
+          "Use the handbook schema",
+          "Salespeople(snum,sname,city,comm), Customer(cnum,cname,city,rating,snum), Orders(onum,amt,odate,cnum,snum). Follow the current faculty lab sheet if its types, constraints or dataset differ. The handbook seed rows are practice data."
+        ],
+        [
+          "Save evidence",
+          "Keep DDL and INSERT scripts, queries, before/after results, join outputs, view/index DDL, MongoDB screenshots and transaction observations. Include no-match, repeated-date and nullable edge cases."
+        ],
+        [
+          "Oracle transaction discipline",
+          "Oracle DDL such as CREATE, ALTER and DROP causes implicit commits. Use DML to practice rollback and savepoints; do not expect ROLLBACK to undo a table creation. Translate NUMBER/VARCHAR2 and MINUS/NVL when moving to PostgreSQL."
+        ]
+      ],
+      "example": "-- Oracle-style schema excerpt (study example, not executed here)\nCREATE TABLE salespeople (\n  snum NUMBER(4) PRIMARY KEY, sname VARCHAR2(20),\n  city VARCHAR2(15), comm NUMBER(5,2)\n);\n\nSELECT c.cname, s.sname\nFROM customer c JOIN salespeople s ON s.snum = c.snum;\n\n-- Highest order per customer\nSELECT cnum, MAX(amt) FROM orders GROUP BY cnum;",
+      "recall": [
+        "Can ROLLBACK undo an Oracle CREATE TABLE?",
+        "Do not rely on that: Oracle DDL introduces implicit commits. Use INSERT, UPDATE and DELETE when demonstrating rollback and savepoints."
+      ],
+      "tasks": [
+        {
+          "id": "c9-t1",
+          "kind": "Lab",
+          "text": "1. Create Salespeople, Customer and Orders; insert data; save DDL and INSERT scripts."
+        },
+        {
+          "id": "c9-t2",
+          "kind": "Lab",
+          "text": "2. Run basic SELECT with required column order and filters; save output."
+        },
+        {
+          "id": "c9-t3",
+          "kind": "Lab",
+          "text": "3. Use NOT, AND, OR and single/multiple-column sorting."
+        },
+        {
+          "id": "c9-t4",
+          "kind": "Lab",
+          "text": "4. Test NULLs, UPDATE and DELETE with before/after results."
+        },
+        {
+          "id": "c9-t5",
+          "kind": "Lab",
+          "text": "5. Create/update/drop views; ALTER columns; CTAS; test CHECK constraints."
+        },
+        {
+          "id": "c9-t6",
+          "kind": "Lab",
+          "text": "6. Use arithmetic, aggregates and per-city/per-customer summaries."
+        },
+        {
+          "id": "c9-t7",
+          "kind": "Lab",
+          "text": "7. Use LIKE, wildcards, IN/NOT IN and same-city comparisons."
+        },
+        {
+          "id": "c9-t8",
+          "kind": "Lab",
+          "text": "8. Create an index; implement inner, left, right and full outer joins."
+        },
+        {
+          "id": "c9-t9",
+          "kind": "Lab",
+          "text": "9. Demonstrate MongoDB CRUD; save shell/Compass results."
+        },
+        {
+          "id": "c9-t10",
+          "kind": "Lab",
+          "text": "10. Demonstrate COMMIT, ROLLBACK, SAVEPOINT and SET TRANSACTION."
+        },
+        {
+          "id": "c9-t11",
+          "kind": "Practice",
+          "text": "Solve all 15 Nirma-style practice prompts from handbook section 9.5."
+        },
+        {
+          "id": "c9-t12",
+          "kind": "Review",
+          "text": "Run all scripts from a clean schema and explain the result without copying."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "In Oracle, what is the key caution for CREATE/ALTER/DROP?",
+          "options": [
+            "They are always undone by ROLLBACK",
+            "They cause implicit commits",
+            "They only change temporary variables"
+          ],
+          "correct": 1,
+          "explanation": "Oracle DDL has implicit-commit behavior; transaction practice should use DML."
+        },
+        {
+          "prompt": "Which join condition matches customer with its salesperson?",
+          "options": ["s.snum = c.snum", "s.city = c.cname", "s.snum = c.cnum"],
+          "correct": 0,
+          "explanation": "The customer.snum foreign-key relationship points to salespeople.snum."
+        }
+      ],
+      "practice": "Create a clean lab folder with schema.sql, seed.sql, query scripts and results. Re-run all ten experiments and verify each against your current faculty sheet."
+    },
+    {
+      "id": 10,
+      "title": "MongoDB & NoSQL practical",
+      "pages": [31, 32],
+      "intro": "Learn the document model and demonstrate CRUD without treating it as SQL in another syntax.",
+      "learn": [
+        [
+          "Documents and collections",
+          "MongoDB stores BSON documents in collections. Documents may contain arrays and nested objects. Tables/collections and rows/documents are approximate analogies, not identical semantics. _id identifies a document."
+        ],
+        [
+          "CRUD and query operations",
+          "Practice insertMany, find, updateOne with $set and deleteOne. Then use filters, comparisons, sort, limit, projection, updateMany, countDocuments and indexes."
+        ],
+        [
+          "Model by access pattern",
+          "Embedding and referencing are design decisions based on reads, updates and consistency needs. Do not copy every relational table one-for-one into a collection. NoSQL still requires intentional schemas and validation."
+        ]
+      ],
+      "example": "// MongoDB Shell study example; not executed by this HTML.\ndb.students.insertMany([\n  {student_id:1, name:\"Nishant\", branch:\"CSE\"},\n  {student_id:2, name:\"Riya\", branch:\"CSE\"}\n]);\ndb.students.find({branch:\"CSE\"});\ndb.students.updateOne({student_id:1}, {$set:{branch:\"AI\"}});\ndb.students.deleteOne({student_id:2});",
+      "recall": [
+        "Should each SQL table automatically become one MongoDB collection?",
+        "No. Model documents around access patterns, update behavior and consistency requirements; decide deliberately between embedding and references."
+      ],
+      "tasks": [
+        {
+          "id": "c10-t1",
+          "kind": "Learn",
+          "text": "Explain databases, collections, BSON documents, fields and _id."
+        },
+        {
+          "id": "c10-t2",
+          "kind": "Lab",
+          "text": "Connect with MongoDB Shell or Compass."
+        },
+        {
+          "id": "c10-t3",
+          "kind": "Lab",
+          "text": "Create a collection and run insert and find operations."
+        },
+        {
+          "id": "c10-t4",
+          "kind": "Lab",
+          "text": "Run replacement, update and delete operations."
+        },
+        {
+          "id": "c10-t5",
+          "kind": "Practice",
+          "text": "Use comparison/logical filters, sort, limit and projection."
+        },
+        {
+          "id": "c10-t6",
+          "kind": "Practice",
+          "text": "Use updateMany and countDocuments."
+        },
+        {
+          "id": "c10-t7",
+          "kind": "Practice",
+          "text": "Create a unique student_id index and test a duplicate."
+        },
+        {
+          "id": "c10-t8",
+          "kind": "Practice",
+          "text": "Compare embedding and referencing for student/course data."
+        },
+        {
+          "id": "c10-t9",
+          "kind": "Review",
+          "text": "Reproduce CRUD independently and save commands/results."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Which operator sets a field during updateOne?",
+          "options": ["$set", "$join", "$table"],
+          "correct": 0,
+          "explanation": "$set updates the specified field values in a document."
+        },
+        {
+          "prompt": "Which principle should guide embedding versus references?",
+          "options": [
+            "Always mirror SQL tables exactly",
+            "Choose randomly",
+            "Use application access patterns and update needs"
+          ],
+          "correct": 2,
+          "explanation": "Document modeling should reflect how related data is read and updated."
+        }
+      ],
+      "practice": "Insert three students, query CSE, update one branch, delete one record, then show the final collection. Save commands and screenshots."
+    },
+    {
+      "id": 11,
+      "title": "Nine-week roadmap & video tracker",
+      "pages": [33, 36],
+      "intro": "Keep the chapter workflow while tracking the handbook’s exact assigned lecture numbers.",
+      "learn": [
+        [
+          "Use the source assignment",
+          "The handbook selects lectures 1–124 and 132–134: 127 videos. Week 6 revisits the earlier-numbered normalization/FD lectures. Lecture numbers are source assignments, not freshly verified playlist positions."
+        ],
+        [
+          "Weekly rhythm",
+          "The suggested study commitment is 90–120 minutes per day, six days per week. Watch, explain from memory, solve fresh questions, implement where applicable and save evidence. Extend the plan when a topic remains weak."
+        ],
+        [
+          "Video completion is one kind of progress",
+          "A watched checkbox records watching only. Weekly gates and independent chapter practice remain separate. Use the full source text below for topic groups and compulsory supplements, including DRC, file organization and optimization."
+        ]
+      ],
+      "example": "Week 1: foundations, videos 1–7\nWeek 2: keys and ER, 8–23\nWeek 3: algebra/calculus, 25–31,34–40,43–44,47\nWeek 4: SQL, 60–73\nWeek 5: advanced SQL/views, 74–89,132–134\nWeek 6: normalization, 24,32–33,41–42,45–46,48–59\nWeek 7: storage/indexes/recovery, 110–124\nWeek 8: transactions, 90–109; revisit 117–118\nWeek 9: complete labs, project and cumulative test",
+      "recall": [
+        "When is a study week complete according to the handbook?",
+        "After the video assignment, written practice, practical implementation and gate are done. A date on the calendar does not demonstrate mastery."
+      ],
+      "tasks": [
+        {
+          "id": "c11-t1",
+          "kind": "Review",
+          "text": "Week 1 gate: explain Unit I without notes and answer at least 8/10 short questions."
+        },
+        {
+          "id": "c11-t2",
+          "kind": "Review",
+          "text": "Week 2 gate: map an unseen ER diagram to a relational schema independently."
+        },
+        {
+          "id": "c11-t3",
+          "kind": "Review",
+          "text": "Week 3 gate: translate a query into algebra and explain equivalent calculus."
+        },
+        {
+          "id": "c11-t4",
+          "kind": "Review",
+          "text": "Week 4 gate: create the lab tables, insert rows and write basic queries independently."
+        },
+        {
+          "id": "c11-t5",
+          "kind": "Review",
+          "text": "Week 5 gate: solve 15 unseen SQL questions and justify returned rows."
+        },
+        {
+          "id": "c11-t6",
+          "kind": "Review",
+          "text": "Week 6 gate: solve the full normalization workflow."
+        },
+        {
+          "id": "c11-t7",
+          "kind": "Review",
+          "text": "Week 7 gate: choose scan/index, draw a B+ insertion and compare hash/tree."
+        },
+        {
+          "id": "c11-t8",
+          "kind": "Review",
+          "text": "Week 8 gate: solve schedules and distinguish recoverable/cascadeless/strict."
+        },
+        {
+          "id": "c11-t9",
+          "kind": "Practice",
+          "text": "Week 9: finish all ten lab groups, MongoDB CRUD and a university database project."
+        },
+        {
+          "id": "c11-t10",
+          "kind": "Review",
+          "text": "Week 9: take a six-unit cumulative test and revise weak topics."
+        },
+        {
+          "id": "video-1",
+          "kind": "Watch",
+          "text": "Lecture 1 · Fundamentals & architecture",
+          "week": 1
+        },
+        {
+          "id": "video-2",
+          "kind": "Watch",
+          "text": "Lecture 2 · Fundamentals & architecture",
+          "week": 1
+        },
+        {
+          "id": "video-3",
+          "kind": "Watch",
+          "text": "Lecture 3 · Fundamentals & architecture",
+          "week": 1
+        },
+        {
+          "id": "video-4",
+          "kind": "Watch",
+          "text": "Lecture 4 · Fundamentals & architecture",
+          "week": 1
+        },
+        {
+          "id": "video-5",
+          "kind": "Watch",
+          "text": "Lecture 5 · Schema & data independence",
+          "week": 1
+        },
+        {
+          "id": "video-6",
+          "kind": "Watch",
+          "text": "Lecture 6 · Schema & data independence",
+          "week": 1
+        },
+        {
+          "id": "video-7",
+          "kind": "Watch",
+          "text": "Lecture 7 · Schema & data independence",
+          "week": 1
+        },
+        {
+          "id": "video-8",
+          "kind": "Watch",
+          "text": "Lecture 8 · Keys & constraints",
+          "week": 2
+        },
+        {
+          "id": "video-9",
+          "kind": "Watch",
+          "text": "Lecture 9 · Keys & constraints",
+          "week": 2
+        },
+        {
+          "id": "video-10",
+          "kind": "Watch",
+          "text": "Lecture 10 · Keys & constraints",
+          "week": 2
+        },
+        {
+          "id": "video-11",
+          "kind": "Watch",
+          "text": "Lecture 11 · Keys & constraints",
+          "week": 2
+        },
+        {
+          "id": "video-12",
+          "kind": "Watch",
+          "text": "Lecture 12 · Foreign keys",
+          "week": 2
+        },
+        {
+          "id": "video-13",
+          "kind": "Watch",
+          "text": "Lecture 13 · Foreign keys",
+          "week": 2
+        },
+        {
+          "id": "video-14",
+          "kind": "Watch",
+          "text": "Lecture 14 · Foreign keys",
+          "week": 2
+        },
+        {
+          "id": "video-15",
+          "kind": "Watch",
+          "text": "Lecture 15 · Foreign keys",
+          "week": 2
+        },
+        {
+          "id": "video-16",
+          "kind": "Watch",
+          "text": "Lecture 16 · ER attributes & cardinalities",
+          "week": 2
+        },
+        {
+          "id": "video-17",
+          "kind": "Watch",
+          "text": "Lecture 17 · ER attributes & cardinalities",
+          "week": 2
+        },
+        {
+          "id": "video-18",
+          "kind": "Watch",
+          "text": "Lecture 18 · ER attributes & cardinalities",
+          "week": 2
+        },
+        {
+          "id": "video-19",
+          "kind": "Watch",
+          "text": "Lecture 19 · ER attributes & cardinalities",
+          "week": 2
+        },
+        {
+          "id": "video-20",
+          "kind": "Watch",
+          "text": "Lecture 20 · ER attributes & cardinalities",
+          "week": 2
+        },
+        {
+          "id": "video-21",
+          "kind": "Watch",
+          "text": "Lecture 21 · Weak entities & ER problems",
+          "week": 2
+        },
+        {
+          "id": "video-22",
+          "kind": "Watch",
+          "text": "Lecture 22 · Weak entities & ER problems",
+          "week": 2
+        },
+        {
+          "id": "video-23",
+          "kind": "Watch",
+          "text": "Lecture 23 · Weak entities & ER problems",
+          "week": 2
+        },
+        {
+          "id": "video-25",
+          "kind": "Watch",
+          "text": "Lecture 25 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-26",
+          "kind": "Watch",
+          "text": "Lecture 26 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-27",
+          "kind": "Watch",
+          "text": "Lecture 27 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-28",
+          "kind": "Watch",
+          "text": "Lecture 28 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-29",
+          "kind": "Watch",
+          "text": "Lecture 29 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-30",
+          "kind": "Watch",
+          "text": "Lecture 30 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-31",
+          "kind": "Watch",
+          "text": "Lecture 31 · Algebra & joins",
+          "week": 3
+        },
+        {
+          "id": "video-34",
+          "kind": "Watch",
+          "text": "Lecture 34 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-35",
+          "kind": "Watch",
+          "text": "Lecture 35 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-36",
+          "kind": "Watch",
+          "text": "Lecture 36 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-37",
+          "kind": "Watch",
+          "text": "Lecture 37 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-38",
+          "kind": "Watch",
+          "text": "Lecture 38 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-39",
+          "kind": "Watch",
+          "text": "Lecture 39 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-40",
+          "kind": "Watch",
+          "text": "Lecture 40 · Products, rename & set operations",
+          "week": 3
+        },
+        {
+          "id": "video-43",
+          "kind": "Watch",
+          "text": "Lecture 43 · Division & problems",
+          "week": 3
+        },
+        {
+          "id": "video-44",
+          "kind": "Watch",
+          "text": "Lecture 44 · Division & problems",
+          "week": 3
+        },
+        {
+          "id": "video-47",
+          "kind": "Watch",
+          "text": "Lecture 47 · Tuple relational calculus",
+          "week": 3
+        },
+        {
+          "id": "video-60",
+          "kind": "Watch",
+          "text": "Lecture 60 · SQL families & constraints",
+          "week": 4
+        },
+        {
+          "id": "video-61",
+          "kind": "Watch",
+          "text": "Lecture 61 · SQL families & constraints",
+          "week": 4
+        },
+        {
+          "id": "video-62",
+          "kind": "Watch",
+          "text": "Lecture 62 · SQL families & constraints",
+          "week": 4
+        },
+        {
+          "id": "video-63",
+          "kind": "Watch",
+          "text": "Lecture 63 · SQL families & constraints",
+          "week": 4
+        },
+        {
+          "id": "video-64",
+          "kind": "Watch",
+          "text": "Lecture 64 · CREATE & ALTER",
+          "week": 4
+        },
+        {
+          "id": "video-65",
+          "kind": "Watch",
+          "text": "Lecture 65 · CREATE & ALTER",
+          "week": 4
+        },
+        {
+          "id": "video-66",
+          "kind": "Watch",
+          "text": "Lecture 66 · CREATE & ALTER",
+          "week": 4
+        },
+        {
+          "id": "video-67",
+          "kind": "Watch",
+          "text": "Lecture 67 · CREATE & ALTER",
+          "week": 4
+        },
+        {
+          "id": "video-68",
+          "kind": "Watch",
+          "text": "Lecture 68 · CREATE & ALTER",
+          "week": 4
+        },
+        {
+          "id": "video-69",
+          "kind": "Watch",
+          "text": "Lecture 69 · Queries, subqueries & grouping",
+          "week": 4
+        },
+        {
+          "id": "video-70",
+          "kind": "Watch",
+          "text": "Lecture 70 · Queries, subqueries & grouping",
+          "week": 4
+        },
+        {
+          "id": "video-71",
+          "kind": "Watch",
+          "text": "Lecture 71 · Queries, subqueries & grouping",
+          "week": 4
+        },
+        {
+          "id": "video-72",
+          "kind": "Watch",
+          "text": "Lecture 72 · Queries, subqueries & grouping",
+          "week": 4
+        },
+        {
+          "id": "video-73",
+          "kind": "Watch",
+          "text": "Lecture 73 · Queries, subqueries & grouping",
+          "week": 4
+        },
+        {
+          "id": "video-74",
+          "kind": "Watch",
+          "text": "Lecture 74 · WITH, membership, EXISTS & LIKE",
+          "week": 5
+        },
+        {
+          "id": "video-75",
+          "kind": "Watch",
+          "text": "Lecture 75 · WITH, membership, EXISTS & LIKE",
+          "week": 5
+        },
+        {
+          "id": "video-76",
+          "kind": "Watch",
+          "text": "Lecture 76 · WITH, membership, EXISTS & LIKE",
+          "week": 5
+        },
+        {
+          "id": "video-77",
+          "kind": "Watch",
+          "text": "Lecture 77 · WITH, membership, EXISTS & LIKE",
+          "week": 5
+        },
+        {
+          "id": "video-78",
+          "kind": "Watch",
+          "text": "Lecture 78 · WITH, membership, EXISTS & LIKE",
+          "week": 5
+        },
+        {
+          "id": "video-79",
+          "kind": "Watch",
+          "text": "Lecture 79 · Order, aggregates & NULL",
+          "week": 5
+        },
+        {
+          "id": "video-80",
+          "kind": "Watch",
+          "text": "Lecture 80 · Order, aggregates & NULL",
+          "week": 5
+        },
+        {
+          "id": "video-81",
+          "kind": "Watch",
+          "text": "Lecture 81 · Order, aggregates & NULL",
+          "week": 5
+        },
+        {
+          "id": "video-82",
+          "kind": "Watch",
+          "text": "Lecture 82 · Subqueries & joins",
+          "week": 5
+        },
+        {
+          "id": "video-83",
+          "kind": "Watch",
+          "text": "Lecture 83 · Subqueries & joins",
+          "week": 5
+        },
+        {
+          "id": "video-84",
+          "kind": "Watch",
+          "text": "Lecture 84 · Subqueries & joins",
+          "week": 5
+        },
+        {
+          "id": "video-85",
+          "kind": "Watch",
+          "text": "Lecture 85 · Problems, functions & cleaning",
+          "week": 5
+        },
+        {
+          "id": "video-86",
+          "kind": "Watch",
+          "text": "Lecture 86 · Problems, functions & cleaning",
+          "week": 5
+        },
+        {
+          "id": "video-87",
+          "kind": "Watch",
+          "text": "Lecture 87 · Problems, functions & cleaning",
+          "week": 5
+        },
+        {
+          "id": "video-88",
+          "kind": "Watch",
+          "text": "Lecture 88 · Problems, functions & cleaning",
+          "week": 5
+        },
+        {
+          "id": "video-89",
+          "kind": "Watch",
+          "text": "Lecture 89 · Problems, functions & cleaning",
+          "week": 5
+        },
+        {
+          "id": "video-132",
+          "kind": "Watch",
+          "text": "Lecture 132 · Views & objects",
+          "week": 5
+        },
+        {
+          "id": "video-133",
+          "kind": "Watch",
+          "text": "Lecture 133 · Views & objects",
+          "week": 5
+        },
+        {
+          "id": "video-134",
+          "kind": "Watch",
+          "text": "Lecture 134 · Views & objects",
+          "week": 5
+        },
+        {
+          "id": "video-24",
+          "kind": "Watch",
+          "text": "Lecture 24 · Anomalies",
+          "week": 6
+        },
+        {
+          "id": "video-32",
+          "kind": "Watch",
+          "text": "Lecture 32 · FDs & closure",
+          "week": 6
+        },
+        {
+          "id": "video-33",
+          "kind": "Watch",
+          "text": "Lecture 33 · FDs & closure",
+          "week": 6
+        },
+        {
+          "id": "video-41",
+          "kind": "Watch",
+          "text": "Lecture 41 · 1NF & 2NF",
+          "week": 6
+        },
+        {
+          "id": "video-42",
+          "kind": "Watch",
+          "text": "Lecture 42 · 1NF & 2NF",
+          "week": 6
+        },
+        {
+          "id": "video-45",
+          "kind": "Watch",
+          "text": "Lecture 45 · 3NF & BCNF",
+          "week": 6
+        },
+        {
+          "id": "video-46",
+          "kind": "Watch",
+          "text": "Lecture 46 · 3NF & BCNF",
+          "week": 6
+        },
+        {
+          "id": "video-48",
+          "kind": "Watch",
+          "text": "Lecture 48 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-49",
+          "kind": "Watch",
+          "text": "Lecture 49 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-50",
+          "kind": "Watch",
+          "text": "Lecture 50 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-51",
+          "kind": "Watch",
+          "text": "Lecture 51 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-52",
+          "kind": "Watch",
+          "text": "Lecture 52 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-53",
+          "kind": "Watch",
+          "text": "Lecture 53 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-54",
+          "kind": "Watch",
+          "text": "Lecture 54 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-55",
+          "kind": "Watch",
+          "text": "Lecture 55 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-56",
+          "kind": "Watch",
+          "text": "Lecture 56 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-57",
+          "kind": "Watch",
+          "text": "Lecture 57 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-58",
+          "kind": "Watch",
+          "text": "Lecture 58 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-59",
+          "kind": "Watch",
+          "text": "Lecture 59 · Higher forms & decomposition",
+          "week": 6
+        },
+        {
+          "id": "video-110",
+          "kind": "Watch",
+          "text": "Lecture 110 · Indexing & I/O",
+          "week": 7
+        },
+        {
+          "id": "video-111",
+          "kind": "Watch",
+          "text": "Lecture 111 · Indexing & I/O",
+          "week": 7
+        },
+        {
+          "id": "video-112",
+          "kind": "Watch",
+          "text": "Lecture 112 · Indexing & I/O",
+          "week": 7
+        },
+        {
+          "id": "video-113",
+          "kind": "Watch",
+          "text": "Lecture 113 · Indexing & I/O",
+          "week": 7
+        },
+        {
+          "id": "video-114",
+          "kind": "Watch",
+          "text": "Lecture 114 · Index categories",
+          "week": 7
+        },
+        {
+          "id": "video-115",
+          "kind": "Watch",
+          "text": "Lecture 115 · Index categories",
+          "week": 7
+        },
+        {
+          "id": "video-116",
+          "kind": "Watch",
+          "text": "Lecture 116 · Index categories",
+          "week": 7
+        },
+        {
+          "id": "video-117",
+          "kind": "Watch",
+          "text": "Lecture 117 · Log recovery",
+          "week": 7
+        },
+        {
+          "id": "video-118",
+          "kind": "Watch",
+          "text": "Lecture 118 · Log recovery",
+          "week": 7
+        },
+        {
+          "id": "video-119",
+          "kind": "Watch",
+          "text": "Lecture 119 · RAID overview",
+          "week": 7
+        },
+        {
+          "id": "video-120",
+          "kind": "Watch",
+          "text": "Lecture 120 · B-tree & B+ tree",
+          "week": 7
+        },
+        {
+          "id": "video-121",
+          "kind": "Watch",
+          "text": "Lecture 121 · B-tree & B+ tree",
+          "week": 7
+        },
+        {
+          "id": "video-122",
+          "kind": "Watch",
+          "text": "Lecture 122 · B-tree & B+ tree",
+          "week": 7
+        },
+        {
+          "id": "video-123",
+          "kind": "Watch",
+          "text": "Lecture 123 · B-tree & B+ tree",
+          "week": 7
+        },
+        {
+          "id": "video-124",
+          "kind": "Watch",
+          "text": "Lecture 124 · B-tree & B+ tree",
+          "week": 7
+        },
+        {
+          "id": "video-90",
+          "kind": "Watch",
+          "text": "Lecture 90 · ACID & states",
+          "week": 8
+        },
+        {
+          "id": "video-91",
+          "kind": "Watch",
+          "text": "Lecture 91 · ACID & states",
+          "week": 8
+        },
+        {
+          "id": "video-92",
+          "kind": "Watch",
+          "text": "Lecture 92 · ACID & states",
+          "week": 8
+        },
+        {
+          "id": "video-93",
+          "kind": "Watch",
+          "text": "Lecture 93 · Schedules & concurrency",
+          "week": 8
+        },
+        {
+          "id": "video-94",
+          "kind": "Watch",
+          "text": "Lecture 94 · Schedules & concurrency",
+          "week": 8
+        },
+        {
+          "id": "video-95",
+          "kind": "Watch",
+          "text": "Lecture 95 · Schedules & concurrency",
+          "week": 8
+        },
+        {
+          "id": "video-96",
+          "kind": "Watch",
+          "text": "Lecture 96 · Schedules & concurrency",
+          "week": 8
+        },
+        {
+          "id": "video-97",
+          "kind": "Watch",
+          "text": "Lecture 97 · Locking & 2PL",
+          "week": 8
+        },
+        {
+          "id": "video-98",
+          "kind": "Watch",
+          "text": "Lecture 98 · Locking & 2PL",
+          "week": 8
+        },
+        {
+          "id": "video-99",
+          "kind": "Watch",
+          "text": "Lecture 99 · Locking & 2PL",
+          "week": 8
+        },
+        {
+          "id": "video-100",
+          "kind": "Watch",
+          "text": "Lecture 100 · Locking & 2PL",
+          "week": 8
+        },
+        {
+          "id": "video-101",
+          "kind": "Watch",
+          "text": "Lecture 101 · Recoverability",
+          "week": 8
+        },
+        {
+          "id": "video-102",
+          "kind": "Watch",
+          "text": "Lecture 102 · Recoverability",
+          "week": 8
+        },
+        {
+          "id": "video-103",
+          "kind": "Watch",
+          "text": "Lecture 103 · Serializability",
+          "week": 8
+        },
+        {
+          "id": "video-104",
+          "kind": "Watch",
+          "text": "Lecture 104 · Serializability",
+          "week": 8
+        },
+        {
+          "id": "video-105",
+          "kind": "Watch",
+          "text": "Lecture 105 · Serializability",
+          "week": 8
+        },
+        {
+          "id": "video-106",
+          "kind": "Watch",
+          "text": "Lecture 106 · Serializability",
+          "week": 8
+        },
+        {
+          "id": "video-107",
+          "kind": "Watch",
+          "text": "Lecture 107 · 2PL variants & timestamps",
+          "week": 8
+        },
+        {
+          "id": "video-108",
+          "kind": "Watch",
+          "text": "Lecture 108 · 2PL variants & timestamps",
+          "week": 8
+        },
+        {
+          "id": "video-109",
+          "kind": "Watch",
+          "text": "Lecture 109 · 2PL variants & timestamps",
+          "week": 8
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Which assignment is included from the later roadmap stage?",
+          "options": [
+            "Videos 132–134 on views and objects",
+            "Every later optional interview video",
+            "No SQL views material"
+          ],
+          "correct": 0,
+          "explanation": "The handbook includes 132–134 in addition to the first 124 videos for 127 assigned lectures."
+        },
+        {
+          "prompt": "Watching all assigned videos demonstrates what?",
+          "options": [
+            "Automatic mastery of every unit",
+            "Completion of the watching component",
+            "That practical labs can be skipped"
+          ],
+          "correct": 1,
+          "explanation": "The handbook requires explanation, fresh practice, implementation and gates in addition to watching."
+        }
+      ],
+      "practice": "Use the video lists below to record watching. Independently complete each weekly gate and keep evidence of your written and practical work.",
+      "weeks": [
+        {
+          "number": 1,
+          "title": "Foundations",
+          "groups": [
+            {
+              "title": "Fundamentals & architecture",
+              "ids": ["video-1", "video-2", "video-3", "video-4"]
+            },
+            {
+              "title": "Schema & data independence",
+              "ids": ["video-5", "video-6", "video-7"]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Relational model & ER",
+          "groups": [
+            {
+              "title": "Keys & constraints",
+              "ids": ["video-8", "video-9", "video-10", "video-11"]
+            },
+            {
+              "title": "Foreign keys",
+              "ids": ["video-12", "video-13", "video-14", "video-15"]
+            },
+            {
+              "title": "ER attributes & cardinalities",
+              "ids": [
+                "video-16",
+                "video-17",
+                "video-18",
+                "video-19",
+                "video-20"
+              ]
+            },
+            {
+              "title": "Weak entities & ER problems",
+              "ids": ["video-21", "video-22", "video-23"]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Algebra & calculus",
+          "groups": [
+            {
+              "title": "Algebra & joins",
+              "ids": [
+                "video-25",
+                "video-26",
+                "video-27",
+                "video-28",
+                "video-29",
+                "video-30",
+                "video-31"
+              ]
+            },
+            {
+              "title": "Products, rename & set operations",
+              "ids": [
+                "video-34",
+                "video-35",
+                "video-36",
+                "video-37",
+                "video-38",
+                "video-39",
+                "video-40"
+              ]
+            },
+            {
+              "title": "Division & problems",
+              "ids": ["video-43", "video-44"]
+            },
+            {
+              "title": "Tuple relational calculus",
+              "ids": ["video-47"]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "SQL foundations",
+          "groups": [
+            {
+              "title": "SQL families & constraints",
+              "ids": ["video-60", "video-61", "video-62", "video-63"]
+            },
+            {
+              "title": "CREATE & ALTER",
+              "ids": [
+                "video-64",
+                "video-65",
+                "video-66",
+                "video-67",
+                "video-68"
+              ]
+            },
+            {
+              "title": "Queries, subqueries & grouping",
+              "ids": [
+                "video-69",
+                "video-70",
+                "video-71",
+                "video-72",
+                "video-73"
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Advanced SQL & views",
+          "groups": [
+            {
+              "title": "WITH, membership, EXISTS & LIKE",
+              "ids": [
+                "video-74",
+                "video-75",
+                "video-76",
+                "video-77",
+                "video-78"
+              ]
+            },
+            {
+              "title": "Order, aggregates & NULL",
+              "ids": ["video-79", "video-80", "video-81"]
+            },
+            {
+              "title": "Subqueries & joins",
+              "ids": ["video-82", "video-83", "video-84"]
+            },
+            {
+              "title": "Problems, functions & cleaning",
+              "ids": [
+                "video-85",
+                "video-86",
+                "video-87",
+                "video-88",
+                "video-89"
+              ]
+            },
+            {
+              "title": "Views & objects",
+              "ids": ["video-132", "video-133", "video-134"]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Normalization",
+          "groups": [
+            {
+              "title": "Anomalies",
+              "ids": ["video-24"]
+            },
+            {
+              "title": "FDs & closure",
+              "ids": ["video-32", "video-33"]
+            },
+            {
+              "title": "1NF & 2NF",
+              "ids": ["video-41", "video-42"]
+            },
+            {
+              "title": "3NF & BCNF",
+              "ids": ["video-45", "video-46"]
+            },
+            {
+              "title": "Higher forms & decomposition",
+              "ids": [
+                "video-48",
+                "video-49",
+                "video-50",
+                "video-51",
+                "video-52",
+                "video-53",
+                "video-54",
+                "video-55",
+                "video-56",
+                "video-57",
+                "video-58",
+                "video-59"
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Storage & indexing",
+          "groups": [
+            {
+              "title": "Indexing & I/O",
+              "ids": ["video-110", "video-111", "video-112", "video-113"]
+            },
+            {
+              "title": "Index categories",
+              "ids": ["video-114", "video-115", "video-116"]
+            },
+            {
+              "title": "Log recovery",
+              "ids": ["video-117", "video-118"]
+            },
+            {
+              "title": "RAID overview",
+              "ids": ["video-119"]
+            },
+            {
+              "title": "B-tree & B+ tree",
+              "ids": [
+                "video-120",
+                "video-121",
+                "video-122",
+                "video-123",
+                "video-124"
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "title": "Transactions",
+          "groups": [
+            {
+              "title": "ACID & states",
+              "ids": ["video-90", "video-91", "video-92"]
+            },
+            {
+              "title": "Schedules & concurrency",
+              "ids": ["video-93", "video-94", "video-95", "video-96"]
+            },
+            {
+              "title": "Locking & 2PL",
+              "ids": ["video-97", "video-98", "video-99", "video-100"]
+            },
+            {
+              "title": "Recoverability",
+              "ids": ["video-101", "video-102"]
+            },
+            {
+              "title": "Serializability",
+              "ids": ["video-103", "video-104", "video-105", "video-106"]
+            },
+            {
+              "title": "2PL variants & timestamps",
+              "ids": ["video-107", "video-108", "video-109"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Practice, projects & mastery",
+      "pages": [37, 38],
+      "intro": "Collect evidence that you can work independently, then revisit the weak areas.",
+      "learn": [
+        [
+          "Minimum targets",
+          "The handbook sets 15 architecture answers plus 3 diagrams, 3 ER designs plus 3 conversions, 25 algebra/calculus questions, 50 SQL queries, 35 normalization problems, 30 storage problems and 30 transaction problems. The chapter-specific roadmap sometimes sets additional work."
+        ],
+        [
+          "Projects with evidence",
+          "Choose student management, e-commerce, a banking simulator or a performance lab. Record requirements, ER design, constraints, edge-case seed data, migrations, queries and startup instructions. Use transactions for atomic operations and parameterized queries in application code."
+        ],
+        [
+          "Correct recurring mistakes",
+          "A nullable FK need not be NOT NULL; use IS NULL; HAVING filters groups; candidate keys are minimal; 2NF checks all candidate keys; BCNF is stronger than 3NF; 2PL can deadlock; measure index benefit; test backup restores."
+        ]
+      ],
+      "example": "University database project evidence\n[ ] Requirements and business rules\n[ ] ER diagram and relational schema\n[ ] Keys, constraints, seed data and migrations\n[ ] 20 useful queries, views and indexes\n[ ] Transaction demonstration and failure case\n[ ] Setup instructions and repeatable results",
+      "recall": [
+        "What is better evidence than finishing a tutorial?",
+        "Solving an unseen problem or rebuilding a working result independently, then explaining why the result is correct and preserving the evidence."
+      ],
+      "tasks": [
+        {
+          "id": "c12-t1",
+          "kind": "Practice",
+          "text": "Reach the architecture target: 15 short answers and three diagrams."
+        },
+        {
+          "id": "c12-t2",
+          "kind": "Practice",
+          "text": "Complete three ER scenarios and three relational conversions."
+        },
+        {
+          "id": "c12-t3",
+          "kind": "Practice",
+          "text": "Solve at least 25 mixed algebra/calculus questions."
+        },
+        {
+          "id": "c12-t4",
+          "kind": "Practice",
+          "text": "Write at least 50 queries across SQL categories."
+        },
+        {
+          "id": "c12-t5",
+          "kind": "Practice",
+          "text": "Solve at least 35 mixed normalization problems."
+        },
+        {
+          "id": "c12-t6",
+          "kind": "Practice",
+          "text": "Solve at least 30 storage/indexing numericals and diagrams."
+        },
+        {
+          "id": "c12-t7",
+          "kind": "Practice",
+          "text": "Solve at least 30 transaction schedules/log problems."
+        },
+        {
+          "id": "c12-t8",
+          "kind": "Lab",
+          "text": "Finish all current Nirma practical experiments independently."
+        },
+        {
+          "id": "c12-t9",
+          "kind": "Project",
+          "text": "Choose a project, write requirements and draw its ER model."
+        },
+        {
+          "id": "c12-t10",
+          "kind": "Project",
+          "text": "Implement constraints, edge-case seed data and versioned schema changes."
+        },
+        {
+          "id": "c12-t11",
+          "kind": "Project",
+          "text": "Add useful queries, views, measured indexes and transaction demos."
+        },
+        {
+          "id": "c12-t12",
+          "kind": "Project",
+          "text": "Write setup instructions; save results and test restoration."
+        },
+        {
+          "id": "c12-t13",
+          "kind": "Review",
+          "text": "Perform the full mastery self-audit in source section 12.5."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "Which demonstrates independent SQL ability most directly?",
+          "options": [
+            "Replaying the same solution video",
+            "Copying a finished query",
+            "Writing and explaining a fresh query from requirements"
+          ],
+          "correct": 2,
+          "explanation": "A fresh task tests whether you can select the right joins, filters and grouping without copying."
+        },
+        {
+          "prompt": "What makes backup recovery evidence convincing?",
+          "options": [
+            "A successful restore with validated data and behavior",
+            "Only the presence of a backup filename",
+            "A screenshot of a download button"
+          ],
+          "correct": 0,
+          "explanation": "Restoration and validation show that the backup can actually recover the required state."
+        }
+      ],
+      "practice": "Pick one project and keep a README, schema, seed data, query set and results. Use the counters below to record cumulative practice; count each distinct problem once."
+    },
+    {
+      "id": 13,
+      "title": "Database engineering & resources",
+      "pages": [39, 41],
+      "intro": "Connect course concepts to secure, measurable, recoverable systems.",
+      "learn": [
+        [
+          "Application and security",
+          "Keep database credentials on the server. Validate requests and use parameterized SQL for values; dynamic identifiers need allow-lists. Use separate least-privilege roles for runtime, migrations and reporting where appropriate."
+        ],
+        [
+          "Operations and scale",
+          "RPO describes tolerable data loss; RTO describes recovery time. Test logical/physical backup restoration. Replication copies data and can lag; partitioning divides a table; sharding distributes subsets across nodes. Choose a shard key deliberately."
+        ],
+        [
+          "Trade-offs and further reading",
+          "During a network partition, CAP concerns the trade-off between a single consistent view and serving requests. It is not an unconditional “pick any two” slogan. Normalize by default and denormalize only for a measured access pattern with a consistency plan. Use the handbook’s textbook, NPTEL and official documentation references."
+        ]
+      ],
+      "example": "Client request\n  → server authentication and validation\n  → parameterized SQL in a least-privilege role\n  → transaction\n  → result mapping and response\n\nRecovery exercise: restore into a separate test database,\nvalidate row counts and application behavior, record time.",
+      "recall": [
+        "What is the difference between replication and sharding?",
+        "Replication maintains copies of data on multiple nodes. Sharding distributes different subsets of data across nodes; it changes locality, balancing and operational complexity."
+      ],
+      "tasks": [
+        {
+          "id": "c13-t1",
+          "kind": "Learn",
+          "text": "Trace request → validation → parameterized query → transaction → response."
+        },
+        {
+          "id": "c13-t2",
+          "kind": "Practice",
+          "text": "Replace string-built SQL values with parameterized query patterns."
+        },
+        {
+          "id": "c13-t3",
+          "kind": "Practice",
+          "text": "Design least-privilege roles for runtime, migrations and reporting."
+        },
+        {
+          "id": "c13-t4",
+          "kind": "Learn",
+          "text": "Distinguish logical/physical backups, RPO and RTO."
+        },
+        {
+          "id": "c13-t5",
+          "kind": "Practice",
+          "text": "Restore a backup into a separate test database and validate the result."
+        },
+        {
+          "id": "c13-t6",
+          "kind": "Recall",
+          "text": "Compare replication, partitioning and sharding; explain replica lag."
+        },
+        {
+          "id": "c13-t7",
+          "kind": "Recall",
+          "text": "Explain CAP specifically during a network partition."
+        },
+        {
+          "id": "c13-t8",
+          "kind": "Practice",
+          "text": "Justify one denormalization only after measuring a workload."
+        },
+        {
+          "id": "c13-t9",
+          "kind": "Review",
+          "text": "Compare the handbook’s CC23 mapping with your current faculty/LMS syllabus."
+        },
+        {
+          "id": "c13-t10",
+          "kind": "Review",
+          "text": "Choose textbook/documentation supplements for any weak topics."
+        }
+      ],
+      "quiz": [
+        {
+          "prompt": "RPO primarily concerns what?",
+          "options": [
+            "The permitted amount of data loss",
+            "The number of SQL tables",
+            "Only a query execution time"
+          ],
+          "correct": 0,
+          "explanation": "Recovery Point Objective describes how much data loss is acceptable; RTO concerns time to recover."
+        },
+        {
+          "prompt": "When should denormalization be considered?",
+          "options": [
+            "Before understanding any access pattern",
+            "When a measured workload benefit justifies duplication and its consistency cost",
+            "Whenever a table has a foreign key"
+          ],
+          "correct": 1,
+          "explanation": "Denormalization deliberately duplicates or precomputes data; justify the access pattern and how consistency will be maintained."
+        }
+      ],
+      "practice": "Describe a small production system with roles, parameterized access, backup/restore checks and a measured tuning decision. Relate each choice to a course concept."
+    }
+  ],
+  "targets": [
+    {
+      "id": "architecture",
+      "title": "Architecture short answers",
+      "target": 15,
+      "chapter": 1
+    },
+    {
+      "id": "diagrams",
+      "title": "Architecture diagrams",
+      "target": 3,
+      "chapter": 1
+    },
+    {
+      "id": "er",
+      "title": "Complete ER scenarios",
+      "target": 3,
+      "chapter": 2
+    },
+    {
+      "id": "conversions",
+      "title": "ER-to-table conversions",
+      "target": 3,
+      "chapter": 2
+    },
+    {
+      "id": "algebra",
+      "title": "Algebra / calculus questions",
+      "target": 25,
+      "chapter": 3
+    },
+    {
+      "id": "sql",
+      "title": "SQL queries",
+      "target": 50,
+      "chapter": 4
+    },
+    {
+      "id": "normalization",
+      "title": "Normalization problems",
+      "target": 35,
+      "chapter": 5
+    },
+    {
+      "id": "storage",
+      "title": "Storage / index problems",
+      "target": 30,
+      "chapter": 6
+    },
+    {
+      "id": "transactions",
+      "title": "Schedule / log problems",
+      "target": 30,
+      "chapter": 8
+    }
+  ],
+  "references": [
+    ["Gate Smashers roadmap", "https://www.gatesmashers.com/roadmaps/dbms-sql"],
+    [
+      "Gate Smashers playlist",
+      "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y"
+    ],
+    [
+      "Nirma curriculum",
+      "https://cse.nirmauni.ac.in/academics/programmes/curriculum/"
+    ],
+    [
+      "Detailed CC23 outline",
+      "https://nirmawebsite.s3.ap-south-1.amazonaws.com/wp-content/uploads/sites/41/2025/05/2CS505CC23_Database-Management-Systems.pdf"
+    ],
+    [
+      "NPTEL DBMS",
+      "https://onlinecourses.nptel.ac.in/e-learning/preview/noc20_cs60"
+    ],
+    ["SQLBolt", "https://sqlbolt.com/"],
+    ["PGExercises", "https://pgexercises.com/"],
+    [
+      "Oracle FreeSQL",
+      "https://www.oracle.com/database/technologies/oracle-free-sql/"
+    ],
+    ["PostgreSQL downloads", "https://www.postgresql.org/download/"],
+    ["PostgreSQL documentation", "https://www.postgresql.org/docs/"],
+    ["DBeaver Community", "https://dbeaver.io/download/"],
+    [
+      "MongoDB introduction",
+      "https://learn.mongodb.com/learning-paths/introduction-to-mongodb"
+    ],
+    [
+      "MongoDB CRUD course",
+      "https://learn.mongodb.com/courses/crud-operations-in-mongodb"
+    ],
+    ["MongoDB Community", "https://www.mongodb.com/try/download/community"],
+    ["MongoDB Compass", "https://www.mongodb.com/try/download/compass"],
+    ["LeetCode SQL 50", "https://leetcode.com/studyplan/top-sql-50/"],
+    ["Database System Concepts", "https://www.db-book.com/"],
+    [
+      "Fundamentals of Database Systems",
+      "https://www.pearson.com/en-us/subject-catalog/p/fundamentals-of-database-systems/P200000003282/9780133970777"
+    ]
+  ]
+}
