@@ -24,13 +24,13 @@
 - All lesson navigation, dialogs, search, checkboxes, schedule reordering and diagram controls are keyboard usable.
 
 ## Phases
-- [ ] 1. Extract exact data and establish tokens, fonts, strict configuration and migration tests. Build, screenshot both themes/three widths, commit.
-- [ ] 2. App shell, responsive sidebar/drawer, command palette, fuzzy search, shortcuts, theme, opt-in store. Test data/state contracts, build/screenshots/commit.
-- [ ] 3. Home, interactive schema motif, stats, roadmap, route motion. Screenshot critique/build/commit.
-- [ ] 4. Lessons, source, checklist, note/counter/video tools, TOC, Shiki/KaTeX, existing self-checks. Verify curriculum and controls, screenshots/build/commit.
-- [ ] 5. SQL plus five matching visual tools. Algorithm/browser tests including errors, screenshots/build/commit.
-- [ ] 6. Focused quizzes, retry missed, first scores; flashcards/Leitner; dashboard, activity/streak/achievements; validated data panel. Tests/screenshots/build/commit.
-- [ ] 7. PWA cache and icons/OG, accessibility and performance, final screenshots, independent review. Run full build, browser/offline/axe/Lighthouse; fix to target; push to GitHub and verify Vercel public deployment.
+- [x] 1. Extract exact data and establish tokens, fonts, strict configuration and migration tests. Build, screenshot both themes/three widths, commit.
+- [x] 2. App shell, responsive sidebar/drawer, command palette, fuzzy search, shortcuts, theme, opt-in store. Test data/state contracts, build/screenshots/commit.
+- [x] 3. Home, interactive schema motif, stats, roadmap, route motion. Screenshot critique/build/commit.
+- [x] 4. Lessons, source, checklist, note/counter/video tools, TOC, Shiki/KaTeX, existing self-checks. Verify curriculum and controls, screenshots/build/commit.
+- [x] 5. SQL plus five matching visual tools. Algorithm/browser tests including errors, screenshots/build/commit.
+- [x] 6. Focused quizzes, retry missed, first scores; flashcards/Leitner; dashboard, activity/streak/achievements; validated data panel. Tests/screenshots/build/commit.
+- [x] 7. PWA cache and icons/OG, accessibility and performance, final screenshots, independent review. Run full build, browser/offline/axe/Lighthouse; fix to target; push to GitHub and verify Vercel public deployment.
 
 ## Interface contracts
 - src/data/course.json: exact original data; src/data/types.ts exports Chapter/Task/Quiz.
