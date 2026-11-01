@@ -8,6 +8,8 @@ A React learning workspace and progress checklist created by Nishant for Nirma B
 
 ## Features
 
+Anyone can study without signing in. Each visitor's progress is separate and saving is optional. See the [public study guide](docs/public-study-guide.md) for getting started and moving progress between devices.
+
 - 13 handbook chapters and 254 checklist actions
 - Persistent progress, notes, review flags, and practice counters
 - Quizzes, active-recall prompts, and DBMS learning activities
